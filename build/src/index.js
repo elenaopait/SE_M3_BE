@@ -19,12 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // routes
 const user_1 = __importDefault(require("./routes/user"));
-const items_1 = __importDefault(require("./routes/items"));
 app.get("/", (req, res) => {
-    res.send("Hello World!<br>sus");
+    res.send("Hello World!");
 });
 app.use("/user", user_1.default);
-app.use("/item", items_1.default);
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, connection_1.dbConnect)();

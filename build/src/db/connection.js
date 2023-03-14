@@ -12,29 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const connection_1 = require("./db/connection");
-const express = require("express");
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// routes
-const user_1 = __importDefault(require("./routes/user"));
-const items_1 = __importDefault(require("./routes/items"));
-app.get("/", (req, res) => {
-    res.send("Hello World!<br>sus");
-});
-app.use("/user", user_1.default);
-app.use("/item", items_1.default);
-const start = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield (0, connection_1.dbConnect)();
-        app.listen(3000, () => {
-            console.log("Example app listening on port 3000!");
+exports.dbConnect = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
+const dotenv = require("dotenv");
+function dbConnect() {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (dotenv.error) {
+            throw dotenv.error;
+        }
+        const { USERNAME, PASSWORD } = dotenv.config().parsed;
+        const connectionString = "mongodb+srv://" +
+            USERNAME +
+            ":" +
+            PASSWORD +
+            "@db.i0bozci.mongodb.net/?retryWrites=true&w=majority";
+        return mongoose_1.default
+            .connect(connectionString)
+            .then(() => {
+            console.log("Successfully connected to database");
+        })
+            .catch((err) => {
+            console.log(err);
+            console.log("Failed to connect to database!");
         });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-start();
-//# sourceMappingURL=index.js.map
+    });
+}
+exports.dbConnect = dbConnect;
+//# sourceMappingURL=connection.js.map
