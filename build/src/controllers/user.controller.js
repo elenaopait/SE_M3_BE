@@ -12,29 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const connection_1 = require("./db/connection");
-const express = require("express");
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// routes
-const user_1 = __importDefault(require("./routes/user"));
-const items_1 = __importDefault(require("./routes/items"));
-app.get("/", (req, res) => {
-    res.send("Hello World!<br>sus");
+exports.register = void 0;
+// models
+const user_1 = __importDefault(require("../models/user"));
+const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { fullName, email, password, role } = req.body;
+    const user = new user_1.default({
+        fullName,
+        email,
+        password,
+        role,
+    });
+    yield user.save();
+    console.log(user);
+    return res.status(201).json({
+        message: "User created successfully",
+    });
 });
-app.use("/user", user_1.default);
-app.use("/item", items_1.default);
-const start = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield (0, connection_1.dbConnect)();
-        app.listen(3004, () => {
-            console.log("Example app listening on port 3004!");
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-start();
-//# sourceMappingURL=index.js.map
+exports.register = register;
+//# sourceMappingURL=user.controller.js.map
