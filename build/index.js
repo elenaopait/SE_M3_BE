@@ -28,8 +28,8 @@ app.use("/item", items_1.default);
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, connection_1.dbConnect)();
-        app.listen(3000, () => {
-            console.log("Example app listening on port 3000!");
+        app.listen(3004, () => {
+            console.log("Example app listening on port 3004!");
         });
     }
     catch (err) {
