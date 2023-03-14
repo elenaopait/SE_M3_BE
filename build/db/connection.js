@@ -25,7 +25,7 @@ function dbConnect() {
             USERNAME +
             ":" +
             PASSWORD +
-            "@testdbcluster.prfz3re.mongodb.net/?retryWrites=true&w=majority";
+            "@db.i0bozci.mongodb.net/?retryWrites=true&w=majority";
         return mongoose_1.default
             .connect(connectionString)
             .then(() => {

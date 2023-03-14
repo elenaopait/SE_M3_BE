@@ -13,7 +13,7 @@ export async function dbConnect() {
     USERNAME +
     ":" +
     PASSWORD +
-    "@testdbcluster.prfz3re.mongodb.net/?retryWrites=true&w=majority";
+    "@db.i0bozci.mongodb.net/?retryWrites=true&w=majority";
 
   return mongoose
     .connect(connectionString)

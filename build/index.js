@@ -22,6 +22,7 @@ const user_1 = __importDefault(require("./routes/user"));
 const items_1 = __importDefault(require("./routes/items"));
 app.get("/", (req, res) => {
     res.send("Hello World!<br>sus");
+    res.send("<br>test2");
 });
 app.use("/user", user_1.default);
 app.use("/item", items_1.default);
